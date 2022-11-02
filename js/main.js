@@ -29,3 +29,16 @@ function submitForm(event) {
   $form.reset();
 
 }
+
+/*****
+ ****  <li>
+ *         <div class="row">
+ *           <div class="column-half">
+ *             <img class="entry-image empty-photo" src="images/placeholder-image-square.jpg">
+ *           </div>
+ *           <div class="column-half">
+ *             <h2 class="entry-title">Title</h2>
+ *             <p class="entry-notes">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam, ipsam?</p>
+ *           </div>
+ *         </div>
+ */
