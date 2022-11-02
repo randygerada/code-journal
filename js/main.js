@@ -42,3 +42,48 @@ function submitForm(event) {
  *           </div>
  *         </div>
  */
+
+function createEntry(entry) {
+  var entryLi = document.createElement('li');
+  entryLi.className = 'entry';
+
+  var $row = document.createElement('div');
+  $row.className = 'row';
+  entryLi.appendChild($row);
+
+  var imgColumnHalf = document.createElement('div');
+  imgColumnHalf.className = 'column-half';
+  $row.appendChild(imgColumnHalf);
+
+  var $img = document.createElement('img');
+  $img.className = 'empty-photo';
+  $img.setAttribute('src', entry.urlPhoto);
+  $img.setAttribute('alt', 'entry image');
+  imgColumnHalf.appendChild($img);
+
+  var textColumnHalf = document.createElement('div');
+  textColumnHalf.className = 'colunm-half';
+  $row.appendChild(textColumnHalf);
+
+  var $title = document.createElement('h2');
+  $title.className = 'entry-title';
+  $title.textContent = entry.title;
+  textColumnHalf.appendChild($title);
+
+  var $notes = document.createElement('p');
+  $notes.className = 'entry-notes';
+  $notes.textContent = entry.notes;
+  textColumnHalf.appendChild($notes);
+
+  return entryLi;
+}
+
+function DOMContentLoaded(event) {
+  for (var i = 0; i < data.entries.length; i++) {
+    var generatedEntry = createEntry(data.entries[i]);
+    $list.append(generatedEntry);
+  }
+}
+
+var $list = document.querySelector('.entry-list');
+document.addEventListener('DOMContentLoaded', DOMContentLoaded);
