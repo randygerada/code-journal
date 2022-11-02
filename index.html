@@ -11,14 +11,72 @@
     integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
     crossorigin="anonymous"
     referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Proza+Libre:ital@1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <header>
+    <div class="container">
+      <h2 class="code-journal-header">Code Journal</h2>
+    </div>
   </header>
   <main>
+    <div class="container" data-view="entry-form">
+      <form class="form">
+        <h1 class="new-entry">New Entry</h1>
+        <div class="row">
+          <div class="column-half">
+            <img class="empty-photo" src="images/placeholder-image-square.jpg" alt="placeholder-image">
+          </div>
+          <div class="column-half">
+            <div class="kontainer">
+              <div class="label-div">
+                <label for="title">Title</label>
+              </div>
+              <div class="input-div">
+                <input required="required"
+                       name="title"
+                       id="title"
+                       class="title-input"
+                       type="text">
+              </div>
+            </div>
+            <div class="kontainer">
+              <div class="label-div">
+                <label for="urlPhoto">Photo URL</label>
+              </div>
+              <div class="input-div">
+                <input required="required"
+                       id="urlPhoto"
+                       name="urlPhoto"
+                       class="photo-url"
+                       type="url">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column-full">
+            <div class="kontainer">
+              <div class="label-div">
+                <label for="notes">Notes</label>
+              </div>
+              <div class="input-div">
+                <textarea required="required" id="notes" name="notes" class="notes-input" rows="5"></textarea>
+              </div>
+            </div>
+            <div class="kontainer submit-save">
+              <input class="submit-button"
+                     type="submit"
+                     value="SAVE">
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
