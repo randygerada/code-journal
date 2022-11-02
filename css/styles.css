@@ -16,12 +16,20 @@ body {
   font-size: 16px;
 }
 
-.new-entry {
+.nav {
+  font-weight: normal;
+  font-size: 13px;
+  padding: 0.5px 25px;
+}
+
+.new-entry,
+.title-entries {
   font-size: 22px;
 }
 
 .code-journal-header,
-.new-entry {
+.new-entry,
+.title-entries {
   font-family: "Proza Libre", sans-serif;
   padding-left: 10px;
 }
@@ -62,7 +70,8 @@ textarea {
   margin: 5px 0;
 }
 
-.submit-button {
+.save-button,
+.button {
   background-color: #4a2372;
   color: white;
   text-transform: uppercase;
@@ -70,4 +79,39 @@ textarea {
   border-radius: 3px;
   padding: 10px 15px;
   font-size: 12px;
+}
+
+.btn-div {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.entry-list {
+  padding: 0;
+  margin: 0;
+}
+
+.entry {
+  list-style: none;
+  margin-bottom: 1rem;
+}
+
+.entry-title {
+  font-size: 0.9em;
+  line-height: 0.5em;
+}
+
+.entry-notes {
+  font-size: 0.8em;
+}
+
+nav > a,
+.btn-div > a {
+  color: white;
+  text-decoration: none;
 }

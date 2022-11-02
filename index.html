@@ -20,11 +20,33 @@
 <body>
   <header>
     <div class="container">
-      <h2 class="code-journal-header">Code Journal</h2>
+      <div class="row">
+        <h2 class="code-journal-header">Code Journal</h2>
+        <nav>
+          <a href="#"><h3 class="nav">Entries</h3></a>
+        </nav>
+      </div>
     </div>
   </header>
   <main>
-    <div class="container" data-view="entry-form">
+    <div class="container entries" data-view="entries">
+      <div class="row">
+        <div class="row-2">
+          <h1 class="title-entries">Entries</h1>
+        </div>
+        <div class="row-2  btn-div">
+          <a href="#"><div class="button-new button">New</div></a>
+        </div>
+      </div>
+      <ul class="entry-list">
+        <li>Dummy</li>
+        <li>Unordered</li>
+        <li>List</li>
+        <li>Testing</li>
+        <li>test</li>
+      </ul>
+    </div>
+    <div class="container entry-form hidden" data-view="entry-form">
       <form class="form">
         <h1 class="new-entry">New Entry</h1>
         <div class="row">
@@ -69,7 +91,7 @@
               </div>
             </div>
             <div class="kontainer submit-save">
-              <input class="submit-button"
+              <input class="save-button"
                      type="submit"
                      value="SAVE">
             </div>
