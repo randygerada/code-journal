@@ -56,7 +56,7 @@ function createEntry(entry) {
   return $entry;
 }
 
-function DOMContentLoaded(event) {
+function loadContentEntry(event) {
   for (var i = 0; i < data.entries.length; i++) {
     var generatedEntry = createEntry(data.entries[i]);
     $list.append(generatedEntry);
@@ -84,7 +84,7 @@ var $form = document.querySelector('.form');
 var changeUrl = document.querySelector('.photo-url');
 var changeImage = document.querySelector('.empty-photo');
 
-document.addEventListener('DOMContentLoaded', DOMContentLoaded);
+document.addEventListener('DOMContentLoaded', loadContentEntry);
 $nav.addEventListener('click', viewEntries);
 $button.addEventListener('click', swapViewEntry);
 $form.addEventListener('submit', submitForm);
