@@ -31,6 +31,10 @@ function createEntry(entry) {
   var $columnOne = document.createElement('div');
   var $img = document.createElement('img');
   var $columnTwo = document.createElement('div');
+  var $rowColumn = document.createElement('div');
+  var $columnLeft = document.createElement('div');
+  var $columnRight = document.createElement('div');
+  var $editIcon = document.createElement('i');
   var $title = document.createElement('h2');
   var $notes = document.createElement('p');
 
@@ -41,8 +45,12 @@ function createEntry(entry) {
   $img.setAttribute('src', entry.urlPhoto);
   $img.setAttribute('alt', 'entry image');
   $columnTwo.className = 'column-half';
+  $rowColumn.className = 'row';
+  $columnLeft.className = 'column-half-2';
   $title.className = 'entry-title';
   $title.textContent = entry.title;
+  $columnRight.className = 'column-half-2 button-div';
+  $editIcon.className = 'fa-solid fa-pencil fa-edit';
   $notes.className = 'entry-notes';
   $notes.textContent = entry.notes;
 
@@ -50,9 +58,14 @@ function createEntry(entry) {
   $row.appendChild($columnOne);
   $columnOne.appendChild($img);
   $row.appendChild($columnTwo);
-  $columnTwo.appendChild($title);
+  $columnTwo.appendChild($rowColumn);
+  $rowColumn.appendChild($columnLeft);
+  $columnLeft.appendChild($title);
+  $rowColumn.appendChild($columnRight);
+  $columnRight.appendChild($editIcon);
   $columnTwo.appendChild($notes);
 
+  $entry.setAttribute('data-entry-id', entry.entryId);
   return $entry;
 }
 
