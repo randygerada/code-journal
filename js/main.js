@@ -1,13 +1,5 @@
 /* global data */
 
-var $form = document.querySelector('.form');
-$form.addEventListener('submit', submitForm);
-
-var changeUrl = document.querySelector('.photo-url');
-var changeImage = document.querySelector('.empty-photo');
-
-changeUrl.addEventListener('input', updateUrl);
-
 function updateUrl(event) {
   var $photoUrl = event.target.value;
   changeImage.setAttribute('src', $photoUrl);
@@ -25,7 +17,8 @@ function submitForm(event) {
   data.nextEntryId++;
   data.entries.unshift(entry);
   changeImage.setAttribute('src', 'images/placeholder-image-square.jpg');
-
+  var generatedEntry = developNewEntry(entry);
+  $list.prepend(generatedEntry);
   $form.reset();
 
 }
@@ -44,38 +37,38 @@ function submitForm(event) {
  */
 
 function createEntry(entry) {
-  var entryLi = document.createElement('li');
-  entryLi.className = 'entry';
+  var $entry = document.createElement('li');
+  $entry.className = 'entry';
 
   var $row = document.createElement('div');
   $row.className = 'row';
-  entryLi.appendChild($row);
+  $entry.appendChild($row);
 
-  var imgColumnHalf = document.createElement('div');
-  imgColumnHalf.className = 'column-half';
-  $row.appendChild(imgColumnHalf);
+  var $columnOne = document.createElement('div');
+  $columnOne.className = 'column-half';
+  $row.appendChild($columnOne);
 
   var $img = document.createElement('img');
   $img.className = 'empty-photo';
   $img.setAttribute('src', entry.urlPhoto);
   $img.setAttribute('alt', 'entry image');
-  imgColumnHalf.appendChild($img);
+  $columnOne.appendChild($img);
 
-  var textColumnHalf = document.createElement('div');
-  textColumnHalf.className = 'colunm-half';
-  $row.appendChild(textColumnHalf);
+  var $columnTwo = document.createElement('div');
+  $columnTwo.className = 'colunm-half';
+  $row.appendChild($columnTwo);
 
   var $title = document.createElement('h2');
   $title.className = 'entry-title';
   $title.textContent = entry.title;
-  textColumnHalf.appendChild($title);
+  $columnTwo.appendChild($title);
 
   var $notes = document.createElement('p');
   $notes.className = 'entry-notes';
   $notes.textContent = entry.notes;
-  textColumnHalf.appendChild($notes);
+  $columnTwo.appendChild($notes);
 
-  return entryLi;
+  return $entry;
 }
 
 function DOMContentLoaded(event) {
@@ -85,5 +78,40 @@ function DOMContentLoaded(event) {
   }
 }
 
+function developNewEntry(event) {
+  $entryForm.className = 'container entry-form';
+  $entries.className = 'container entries hidden';
+  data.view = 'entry-form';
+}
+
+function viewEntries(event) {
+  $entryForm.className = 'container entry-form hidden';
+  $entries.className = 'container entries';
+  data.view = 'entry-form';
+}
+
+var $entryForm = document.querySelector('.entry-form');
+var $entries = document.querySelector('.entries');
+
 var $list = document.querySelector('.entry-list');
 document.addEventListener('DOMContentLoaded', DOMContentLoaded);
+
+var $nav = document.querySelector('.entries-nav');
+$nav.addEventListener('click', viewEntries);
+
+var newButton = document.querySelector('.btn-new');
+newButton.addEventListener('click', developNewEntry);
+
+var $form = document.querySelector('.form');
+$form.addEventListener('submit', submitForm);
+
+var changeUrl = document.querySelector('.photo-url');
+var changeImage = document.querySelector('.empty-photo');
+
+changeUrl.addEventListener('input', updateUrl);
+
+if (data.view === 'entry-form') {
+  developNewEntry();
+} else {
+  viewEntries();
+}
