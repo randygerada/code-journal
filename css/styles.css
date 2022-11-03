@@ -1,5 +1,5 @@
 * {
-  font-family: "Open Sans", sans-serif;
+  font-family: sans-serif;
 }
 
 header {
@@ -16,14 +16,20 @@ body {
   font-size: 16px;
 }
 
-.new-entry {
+.nav {
+  font-weight: normal;
+  font-size: 14px;
+}
+
+.new-entry, {
   font-size: 22px;
 }
 
 .code-journal-header,
-.new-entry {
+.new-entry,
+.nav {
   font-family: "Proza Libre", sans-serif;
-  padding-left: 10px;
+  padding: 0 0.75rem;
 }
 
 .empty-photo {
@@ -39,7 +45,7 @@ body {
 
 .label-div > label {
   font-weight: bold;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .input-div > input {
@@ -62,7 +68,7 @@ textarea {
   margin: 5px 0;
 }
 
-.submit-button {
+.button {
   background-color: #4a2372;
   color: white;
   text-transform: uppercase;
@@ -70,4 +76,38 @@ textarea {
   border-radius: 3px;
   padding: 10px 15px;
   font-size: 12px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.button-div {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.entry-list {
+  padding: 0;
+  margin: 0;
+}
+
+.entry {
+  list-style: none;
+  margin: 30px;
+}
+
+.entry-title {
+  line-height: 1;
+  font-size: 16px;
+}
+
+.entry-notes {
+  font-size: 14px;
 }

@@ -20,11 +20,28 @@
 <body>
   <header>
     <div class="container">
-      <h2 class="code-journal-header">Code Journal</h2>
+      <div class="row">
+        <h2 class="code-journal-header">Code Journal</h2>
+        <nav>
+          <a href="#"><h3 class="nav entries-nav">Entries</h3></a>
+        </nav>
+      </div>
     </div>
   </header>
   <main>
-    <div class="container" data-view="entry-form">
+    <div class="container entries" data-view="entries">
+      <div class="row">
+        <div class="column-half-2">
+          <h1 class="new-entry">Entries</h1>
+        </div>
+        <div class="column-half-2  button-div">
+          <a href="#"><div class="button-new button">New</div></a>
+        </div>
+      </div>
+
+      <ul class="entry-list"></ul>
+    </div>
+    <div class="container entry-form hidden" data-view="entry-form">
       <form class="form">
         <h1 class="new-entry">New Entry</h1>
         <div class="row">
@@ -36,7 +53,7 @@
               <div class="label-div">
                 <label for="title">Title</label>
               </div>
-              <div class="input-div">
+              <div class="input-div input-notes">
                 <input required="required"
                        name="title"
                        id="title"
@@ -68,8 +85,8 @@
                 <textarea required="required" id="notes" name="notes" class="notes-input" rows="5"></textarea>
               </div>
             </div>
-            <div class="kontainer submit-save">
-              <input class="submit-button"
+            <div class="kontainer button-div">
+              <input class="button"
                      type="submit"
                      value="SAVE">
             </div>
