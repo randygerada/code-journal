@@ -13,13 +13,13 @@
   flex-wrap: wrap;
 }
 
-.column-half-2 {
-  flex-basis: 50%;
-}
-
 .column-full,
 .column-half {
   width: 100%;
+}
+
+.column-half-2 {
+  flex-basis: 50%;
 }
 
 @media screen and (min-width: 768px) {

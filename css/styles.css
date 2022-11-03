@@ -1,5 +1,5 @@
 * {
-  font-family: "Open Sans", sans-serif;
+  font-family: sans-serif;
 }
 
 header {
@@ -18,20 +18,18 @@ body {
 
 .nav {
   font-weight: normal;
-  font-size: 13px;
-  padding: 0.5px 25px;
+  font-size: 14px;
 }
 
-.new-entry,
-.title-entries {
+.new-entry, {
   font-size: 22px;
 }
 
 .code-journal-header,
 .new-entry,
-.title-entries {
+.nav {
   font-family: "Proza Libre", sans-serif;
-  padding-left: 10px;
+  padding: 0 0.75rem;
 }
 
 .empty-photo {
@@ -47,7 +45,7 @@ body {
 
 .label-div > label {
   font-weight: bold;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .input-div > input {
@@ -70,7 +68,6 @@ textarea {
   margin: 5px 0;
 }
 
-.save-button,
 .button {
   background-color: #4a2372;
   color: white;
@@ -81,7 +78,12 @@ textarea {
   font-size: 12px;
 }
 
-.btn-div {
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.button-div {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -98,20 +100,14 @@ textarea {
 
 .entry {
   list-style: none;
-  margin-bottom: 1rem;
+  margin: 30px;
 }
 
 .entry-title {
-  font-size: 0.9em;
-  line-height: 0.5em;
+  line-height: 1;
+  font-size: 16px;
 }
 
 .entry-notes {
-  font-size: 0.8em;
-}
-
-nav > a,
-.btn-div > a {
-  color: white;
-  text-decoration: none;
+  font-size: 14px;
 }
