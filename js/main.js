@@ -50,7 +50,7 @@ function createEntry(entry) {
   $title.className = 'entry-title';
   $title.textContent = entry.title;
   $columnRight.className = 'column-half-2 button-div';
-  $editIcon.className = 'fa-solid fa-pencil fa-edit';
+  $editIcon.className = 'fa-solid fa-pencil fa-edit icon-edit';
   $notes.className = 'entry-notes';
   $notes.textContent = entry.notes;
 
@@ -67,6 +67,31 @@ function createEntry(entry) {
 
   $entry.setAttribute('data-entry-id', entry.entryId);
   return $entry;
+}
+
+// edit function
+function edit(event) {
+  if (event.target.tagName !== 'I') {
+    return;
+  }
+  swapViewEntry();
+  var $entry;
+  var getObj = matchObj($entry);
+  return getObj;
+
+}
+
+// find matching entry object
+// loop through through data.entries
+
+function matchObj($entry) {
+  var numEntryId = parseInt($entry.getAttribute('data-entry-id'));
+  for (var i = 0; i < data.entries.length; i++) {
+    if (numEntryId === data.entries[i].entryId) {
+      var obj = data.entries[i];
+      return obj;
+    }
+  }
 }
 
 function loadContentEntry(event) {
@@ -102,6 +127,8 @@ $nav.addEventListener('click', viewEntries);
 $button.addEventListener('click', swapViewEntry);
 $form.addEventListener('submit', submitForm);
 changeUrl.addEventListener('input', updateUrl);
+
+$list.addEventListener('click', edit);
 
 if (data.view === 'entry-form') {
   swapViewEntry();
