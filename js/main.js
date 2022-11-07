@@ -75,10 +75,10 @@ function edit(event) {
     return;
   }
   swapViewEntry();
-  var $entry;
+  var $entry = event.target.closest('li');
+  data.editing = $entry;
   var getObj = matchObj($entry);
-  return getObj;
-
+  swapViewEntry(getObj);
 }
 
 // find matching entry object
