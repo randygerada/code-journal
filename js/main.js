@@ -8,21 +8,31 @@ function updateUrl(event) {
 
 function submitForm(event) {
   event.preventDefault();
-  var entry = {
-    title: $form.elements.title.value,
-    urlPhoto: $form.elements.urlPhoto.value,
-    notes: $form.elements.notes.value
-  };
+  if (data.editing === null) {
+    var entry = {};
+    entry.entryId = data.nextEntryId;
+  } else {
+    var $entry = data.editing;
+    entry = matchObj($entry);
+  }
 
-  entry.entryId = data.nextEntryId;
-  data.nextEntryId++;
-  data.entries.unshift(entry);
+  entry.title = $form.elements.title.value;
+  entry.urlPhoto = $form.elements.urlPhoto.value;
+  entry.notes = $form.elements.notes.value;
   changeImage.setAttribute('src', 'images/placeholder-image-square.jpg');
   var generatedEntry = createEntry(entry);
-  $list.prepend(generatedEntry);
+
+  if (data.editing === null) {
+    $list.prepend(generatedEntry);
+    data.entries.unshift(entry);
+    data.nextEntryId++;
+
+  } else {
+    $entry.replaceWith(generatedEntry);
+  }
   viewEntries();
   $form.reset();
-
+  data.editing = null;
 }
 
 function createEntry(entry) {
@@ -78,7 +88,11 @@ function edit(event) {
   var $entry = event.target.closest('li');
   data.editing = $entry;
   var getObj = matchObj($entry);
-  swapViewEntry(getObj);
+
+  changeTitle.value = getObj.title;
+  changeUrl.value = getObj.$photoUrl;
+  changeImage.setAttribute('src', getObj.changeUrl);
+  changeNotes.value = getObj.notes;
 }
 
 // find matching entry object
@@ -121,6 +135,8 @@ var $button = document.querySelector('.button-new');
 var $form = document.querySelector('.form');
 var changeUrl = document.querySelector('.photo-url');
 var changeImage = document.querySelector('.empty-photo');
+var changeTitle = document.querySelector('.title-input');
+var changeNotes = document.querySelector('.notes-input');
 
 document.addEventListener('DOMContentLoaded', loadContentEntry);
 $nav.addEventListener('click', viewEntries);
