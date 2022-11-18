@@ -78,6 +78,10 @@ textarea {
   font-size: 12px;
 }
 
+.icon-edit {
+  color: #4a2372;
+}
+
 a {
   color: white;
   text-decoration: none;
@@ -89,7 +93,8 @@ a {
   align-items: center;
 }
 
-.button:hover {
+.button:hover,
+.icon-edit {
   cursor: pointer;
 }
 
