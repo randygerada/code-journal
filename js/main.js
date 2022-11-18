@@ -78,6 +78,17 @@ function createEntry(entry) {
   $entry.setAttribute('data-entry-id', entry.entryId);
   return $entry;
 }
+function swapViewEntry(event) {
+  $entryForm.className = 'container entry-form';
+  $entries.className = 'container entries hidden';
+  data.view = 'entry-form';
+}
+
+function viewEntries(event) {
+  $entryForm.className = 'container entry-form hidden';
+  $entries.className = 'container entries';
+  data.view = 'entries';
+}
 
 // edit function
 function edit(event) {
@@ -90,8 +101,8 @@ function edit(event) {
   var getObj = matchObj($entry);
 
   changeTitle.value = getObj.title;
-  changeUrl.value = getObj.$photoUrl;
-  changeImage.setAttribute('src', getObj.changeUrl);
+  changeUrl.value = getObj.urlPhoto;
+  changeImage.setAttribute('src', getObj.urlPhoto);
   changeNotes.value = getObj.notes;
 }
 
@@ -113,18 +124,6 @@ function loadContentEntry(event) {
     var generatedEntry = createEntry(data.entries[i]);
     $list.append(generatedEntry);
   }
-}
-
-function swapViewEntry(event) {
-  $entryForm.className = 'container entry-form';
-  $entries.className = 'container entries hidden';
-  data.view = 'entry-form';
-}
-
-function viewEntries(event) {
-  $entryForm.className = 'container entry-form hidden';
-  $entries.className = 'container entries';
-  data.view = 'entries';
 }
 
 var $entryForm = document.querySelector('.entry-form');
