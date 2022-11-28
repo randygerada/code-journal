@@ -19,7 +19,7 @@ function submitForm(event) {
   entry.title = $form.elements.title.value;
   entry.urlPhoto = $form.elements.urlPhoto.value;
   entry.notes = $form.elements.notes.value;
-  changeImage.setAttribute('src', 'images/placeholder-image-square.jpg');
+  // changeImage.setAttribute('src', 'images/placeholder-image-square.jpg');
   var generatedEntry = createEntry(entry);
 
   if (data.editing === null) {
@@ -31,53 +31,62 @@ function submitForm(event) {
     $entry.replaceWith(generatedEntry);
   }
   viewEntries();
-  $form.reset();
-  data.editing = null;
+  // $form.reset();
+  // data.editing = null;
 }
 
 function createEntry(entry) {
   var $entry = document.createElement('li');
-  var $row = document.createElement('div');
-  var $columnOne = document.createElement('div');
-  var $img = document.createElement('img');
-  var $columnTwo = document.createElement('div');
-  var $rowColumn = document.createElement('div');
-  var $columnLeft = document.createElement('div');
-  var $columnRight = document.createElement('div');
-  var $editIcon = document.createElement('i');
-  var $title = document.createElement('h2');
-  var $notes = document.createElement('p');
-
   $entry.className = 'entry';
+
+  var $row = document.createElement('div');
   $row.className = 'row';
+  $entry.appendChild($row);
+
+  var $columnOne = document.createElement('div');
   $columnOne.className = 'column-half';
+  $row.appendChild($columnOne);
+
+  var $img = document.createElement('img');
   $img.className = 'empty-photo';
   $img.setAttribute('src', entry.urlPhoto);
   $img.setAttribute('alt', 'entry image');
+  $columnOne.appendChild($img);
+
+  var $columnTwo = document.createElement('div');
   $columnTwo.className = 'column-half';
+  $row.appendChild($columnTwo);
+
+  var $rowColumn = document.createElement('div');
   $rowColumn.className = 'row';
+  $columnTwo.appendChild($rowColumn);
+
+  var $columnLeft = document.createElement('div');
   $columnLeft.className = 'column-half-2';
+  $rowColumn.appendChild($columnLeft);
+
+  var $columnRight = document.createElement('div');
+  $columnRight.className = 'column-half-2 button-div right';
+  $rowColumn.appendChild($columnRight);
+
+  var $title = document.createElement('h2');
   $title.className = 'entry-title';
   $title.textContent = entry.title;
-  $columnRight.className = 'column-half-2 button-div';
+  $columnLeft.appendChild($title);
+
+  var $editIcon = document.createElement('i');
   $editIcon.className = 'fa-solid fa-pencil fa-edit icon-edit';
+  $columnRight.appendChild($editIcon);
+
+  var $notes = document.createElement('p');
   $notes.className = 'entry-notes';
   $notes.textContent = entry.notes;
-
-  $entry.appendChild($row);
-  $row.appendChild($columnOne);
-  $columnOne.appendChild($img);
-  $row.appendChild($columnTwo);
-  $columnTwo.appendChild($rowColumn);
-  $rowColumn.appendChild($columnLeft);
-  $columnLeft.appendChild($title);
-  $rowColumn.appendChild($columnRight);
-  $columnRight.appendChild($editIcon);
   $columnTwo.appendChild($notes);
 
   $entry.setAttribute('data-entry-id', entry.entryId);
   return $entry;
 }
+
 function swapViewEntry(event) {
   $entryForm.className = 'container entry-form';
   $entries.className = 'container entries hidden';
@@ -88,6 +97,8 @@ function viewEntries(event) {
   $entryForm.className = 'container entry-form hidden';
   $entries.className = 'container entries';
   data.view = 'entries';
+
+  data.editing = null;
 }
 
 function edit(event) {
