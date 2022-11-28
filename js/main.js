@@ -153,7 +153,7 @@ function confirm(event) {
   var $entry = data.editing;
   var entryId = $entry.getAttribute('data-entry-id');
 
-  var $entryNode = document.querySelector('.entry');
+  var $entryNode = document.querySelectorAll('.entry');
   for (var i = 0; i < $entryNode.length; i++) {
     if ($entryNode[i].getAttribute('data-entry-id') === entryId) {
       $entryNode[i].remove();
