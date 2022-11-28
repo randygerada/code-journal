@@ -8,21 +8,31 @@ function updateUrl(event) {
 
 function submitForm(event) {
   event.preventDefault();
-  var entry = {
-    title: $form.elements.title.value,
-    urlPhoto: $form.elements.urlPhoto.value,
-    notes: $form.elements.notes.value
-  };
+  if (data.editing === null) {
+    var entry = {};
+    entry.entryId = data.nextEntryId;
+  } else {
+    var $entry = data.editing;
+    entry = matchObj($entry);
+  }
 
-  entry.entryId = data.nextEntryId;
-  data.nextEntryId++;
-  data.entries.unshift(entry);
+  entry.title = $form.elements.title.value;
+  entry.urlPhoto = $form.elements.urlPhoto.value;
+  entry.notes = $form.elements.notes.value;
   changeImage.setAttribute('src', 'images/placeholder-image-square.jpg');
   var generatedEntry = createEntry(entry);
-  $list.prepend(generatedEntry);
+
+  if (data.editing === null) {
+    $list.prepend(generatedEntry);
+    data.entries.unshift(entry);
+    data.nextEntryId++;
+
+  } else {
+    $entry.replaceWith(generatedEntry);
+  }
   viewEntries();
   $form.reset();
-
+  data.editing = null;
 }
 
 function createEntry(entry) {
@@ -31,6 +41,10 @@ function createEntry(entry) {
   var $columnOne = document.createElement('div');
   var $img = document.createElement('img');
   var $columnTwo = document.createElement('div');
+  var $rowColumn = document.createElement('div');
+  var $columnLeft = document.createElement('div');
+  var $columnRight = document.createElement('div');
+  var $editIcon = document.createElement('i');
   var $title = document.createElement('h2');
   var $notes = document.createElement('p');
 
@@ -41,8 +55,12 @@ function createEntry(entry) {
   $img.setAttribute('src', entry.urlPhoto);
   $img.setAttribute('alt', 'entry image');
   $columnTwo.className = 'column-half';
+  $rowColumn.className = 'row';
+  $columnLeft.className = 'column-half-2';
   $title.className = 'entry-title';
   $title.textContent = entry.title;
+  $columnRight.className = 'column-half-2 button-div';
+  $editIcon.className = 'fa-solid fa-pencil fa-edit icon-edit';
   $notes.className = 'entry-notes';
   $notes.textContent = entry.notes;
 
@@ -50,19 +68,16 @@ function createEntry(entry) {
   $row.appendChild($columnOne);
   $columnOne.appendChild($img);
   $row.appendChild($columnTwo);
-  $columnTwo.appendChild($title);
+  $columnTwo.appendChild($rowColumn);
+  $rowColumn.appendChild($columnLeft);
+  $columnLeft.appendChild($title);
+  $rowColumn.appendChild($columnRight);
+  $columnRight.appendChild($editIcon);
   $columnTwo.appendChild($notes);
 
+  $entry.setAttribute('data-entry-id', entry.entryId);
   return $entry;
 }
-
-function loadContentEntry(event) {
-  for (var i = 0; i < data.entries.length; i++) {
-    var generatedEntry = createEntry(data.entries[i]);
-    $list.append(generatedEntry);
-  }
-}
-
 function swapViewEntry(event) {
   $entryForm.className = 'container entry-form';
   $entries.className = 'container entries hidden';
@@ -75,6 +90,38 @@ function viewEntries(event) {
   data.view = 'entries';
 }
 
+function edit(event) {
+  if (event.target.tagName !== 'I') {
+    return;
+  }
+  swapViewEntry();
+  var $entry = event.target.closest('li');
+  data.editing = $entry;
+  var getObj = matchObj($entry);
+
+  changeTitle.value = getObj.title;
+  changeUrl.value = getObj.urlPhoto;
+  changeImage.setAttribute('src', getObj.urlPhoto);
+  changeNotes.value = getObj.notes;
+}
+
+function matchObj($entry) {
+  var numEntryId = parseInt($entry.getAttribute('data-entry-id'));
+  for (var i = 0; i < data.entries.length; i++) {
+    if (numEntryId === data.entries[i].entryId) {
+      var obj = data.entries[i];
+      return obj;
+    }
+  }
+}
+
+function loadContentEntry(event) {
+  for (var i = 0; i < data.entries.length; i++) {
+    var generatedEntry = createEntry(data.entries[i]);
+    $list.append(generatedEntry);
+  }
+}
+
 var $entryForm = document.querySelector('.entry-form');
 var $entries = document.querySelector('.entries');
 var $list = document.querySelector('.entry-list');
@@ -83,12 +130,16 @@ var $button = document.querySelector('.button-new');
 var $form = document.querySelector('.form');
 var changeUrl = document.querySelector('.photo-url');
 var changeImage = document.querySelector('.empty-photo');
+var changeTitle = document.querySelector('.title-input');
+var changeNotes = document.querySelector('.notes-input');
 
 document.addEventListener('DOMContentLoaded', loadContentEntry);
 $nav.addEventListener('click', viewEntries);
 $button.addEventListener('click', swapViewEntry);
 $form.addEventListener('submit', submitForm);
 changeUrl.addEventListener('input', updateUrl);
+
+$list.addEventListener('click', edit);
 
 if (data.view === 'entry-form') {
   swapViewEntry();
