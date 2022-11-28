@@ -19,7 +19,7 @@ function submitForm(event) {
   entry.title = $form.elements.title.value;
   entry.urlPhoto = $form.elements.urlPhoto.value;
   entry.notes = $form.elements.notes.value;
-  // changeImage.setAttribute('src', 'images/placeholder-image-square.jpg');
+
   var generatedEntry = createEntry(entry);
 
   if (data.editing === null) {
@@ -31,8 +31,7 @@ function submitForm(event) {
     $entry.replaceWith(generatedEntry);
   }
   viewEntries();
-  // $form.reset();
-  // data.editing = null;
+
 }
 
 function createEntry(entry) {
@@ -87,6 +86,14 @@ function createEntry(entry) {
   return $entry;
 }
 
+function loadContentEntry(event) {
+  for (var i = 0; i < data.entries.length; i++) {
+    var generatedEntry = createEntry(data.entries[i]);
+    $list.append(generatedEntry);
+  }
+
+}
+
 function swapViewEntry(event) {
   $entryForm.className = 'container entry-form';
   $entries.className = 'container entries hidden';
@@ -101,11 +108,19 @@ function viewEntries(event) {
   data.editing = null;
 }
 
+function makeAnEntry(event) {
+  $form.reset();
+  changeImage.setAttribute('src', 'images/placeholder-image-square.jpg');
+  swapViewEntry();
+
+}
+
 function edit(event) {
   if (event.target.tagName !== 'I') {
     return;
   }
   swapViewEntry();
+
   var $entry = event.target.closest('li');
   data.editing = $entry;
   var getObj = matchObj($entry);
@@ -119,36 +134,34 @@ function edit(event) {
 function matchObj($entry) {
   var numEntryId = parseInt($entry.getAttribute('data-entry-id'));
   for (var i = 0; i < data.entries.length; i++) {
-    if (numEntryId === data.entries[i].entryId) {
+    if (numEntryId === data.entries[i].entryId.toString()) {
       var obj = data.entries[i];
       return obj;
     }
   }
 }
 
-function loadContentEntry(event) {
-  for (var i = 0; i < data.entries.length; i++) {
-    var generatedEntry = createEntry(data.entries[i]);
-    $list.append(generatedEntry);
-  }
-}
-
 var $entryForm = document.querySelector('.entry-form');
 var $entries = document.querySelector('.entries');
+
 var $list = document.querySelector('.entry-list');
+document.addEventListener('DOMContentLoaded', loadContentEntry);
+
 var $nav = document.querySelector('.entries-nav');
+$nav.addEventListener('click', viewEntries);
+
 var $button = document.querySelector('.button-new');
+$button.addEventListener('click', makeAnEntry);
+
 var $form = document.querySelector('.form');
+$form.addEventListener('submit', submitForm);
+
 var changeUrl = document.querySelector('.photo-url');
 var changeImage = document.querySelector('.empty-photo');
+changeUrl.addEventListener('input', updateUrl);
+
 var changeTitle = document.querySelector('.title-input');
 var changeNotes = document.querySelector('.notes-input');
-
-document.addEventListener('DOMContentLoaded', loadContentEntry);
-$nav.addEventListener('click', viewEntries);
-$button.addEventListener('click', swapViewEntry);
-$form.addEventListener('submit', submitForm);
-changeUrl.addEventListener('input', updateUrl);
 
 $list.addEventListener('click', edit);
 
