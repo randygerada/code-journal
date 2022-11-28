@@ -17,7 +17,29 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
+  <div class="overlay hidden"></div>
+  <div class="delete-modal-div hidden">
+    <div class="delete-modal">
+      <div class="row center">
+        <p class="delete-statement">Are you sure you want to want to delete this entry?</p>
+      </div>
+      <div class="row">
+        <div class="column-half-2">
+          <div class="button-div left">
+            <div class="cancel button">Cancel</div>
+          </div>
+        </div>
+        <div class="column-half-2">
+          <div class="button-div right">
+            <div class="confirm button">Confirm</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <header>
     <div class="container">
       <div class="row">
@@ -34,13 +56,13 @@
         <div class="column-half-2">
           <h1 class="new-entry">Entries</h1>
         </div>
-        <div class="column-half-2  button-div">
+        <div class="column-half-2  button-div right">
           <a href="#"><div class="button-new button">New</div></a>
         </div>
       </div>
-
       <ul class="entry-list"></ul>
     </div>
+
     <div class="container entry-form hidden" data-view="entry-form">
       <form class="form">
         <h1 class="new-entry">New Entry</h1>
@@ -85,10 +107,21 @@
                 <textarea required="required" id="notes" name="notes" class="notes-input" rows="5"></textarea>
               </div>
             </div>
-            <div class="kontainer button-div">
-              <input class="button"
-                     type="submit"
-                     value="SAVE">
+          </div>
+        </div>
+        <div class="row">
+          <div class="column-full">
+            <div class="column-half-2">
+              <div class="delete-button-div">
+                <a href="#">
+                  <h3 class="delete-button hidden">Delete Entry</h3>
+                </a>
+              </div>
+            </div>
+            <div class="column-half-2">
+              <div class="label-div button-div right">
+                <input class="button save" type="submit" value="SAVE">
+              </div>
             </div>
           </div>
         </div>

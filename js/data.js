@@ -1,5 +1,10 @@
 /* exported data */
 
+function beforeUnload(event) {
+  var dataJSON = JSON.stringify(data);
+  this.localStorage.setItem('code-journal-local-storage', dataJSON);
+}
+
 var data = {
   view: 'entry-form',
   entries: [],
@@ -12,7 +17,4 @@ if (previousDataJSON !== null) {
   data = JSON.parse(previousDataJSON);
 }
 
-window.addEventListener('beforeunload', function (event) {
-  var dataJSON = JSON.stringify(data);
-  this.localStorage.setItem('code-journal-local-storage', dataJSON);
-});
+window.addEventListener('beforeunload', beforeUnload);
